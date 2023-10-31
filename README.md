@@ -1,8 +1,8 @@
 # Fibonacci# DeretBilanganFibonacci
 
-Nama : Syifa Aurellia Rahma
+Nama : Mohammad Azmi Abdussyukur
 
-NIM : 312210009
+NIM : 312210109
 
 Kelas : TI.22.A1
 
