@@ -219,9 +219,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-https://github.com/MohAzmii04/Fibonacci/assets/115864496/9c46c5d3-da07-4eae-8b01-a7ebe1c8cf75
 
-
+https://github.com/MohAzmii04/Fibonacci/assets/115864496/718ceb26-5d4c-435c-bb41-e8b1bc4b1dc9
 
 
 ## Finish, Terima Kasih
