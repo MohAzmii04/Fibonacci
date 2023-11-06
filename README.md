@@ -14,83 +14,91 @@ Tugas : Buatlah Method Program java Toast Number, dengan menghasilkan Bilangan F
 ```
 package com.fibonacci;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
+    private TextView showCount;
     private int count = 1;
-    private TextView showcount;
-    private Button mbtnToast,mbtnCount, mbtnRestart;
+    private long fibNMinus1 = 1;
+    private long fibNMinus2 = 0;
+    private int limit = -1; // Inisialisasi limit dengan nilai default
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fibonacci);
 
-        showcount = findViewById(R.id.show_count);
-        mbtnToast = findViewById(R.id.button_toast);
-        mbtnCount = findViewById(R.id.button_count);
-        mbtnRestart = findViewById(R.id.button_kembali);
-
-        mbtnToast.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showToast();
-            }
-        });
-
-        mbtnCount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                countTop();
-            }
-        });
-        mbtnRestart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                count = 1;
-                showcount.setText("1");
-            }
-        });
+        showCount = findViewById(R.id.show_count);
     }
 
-    public void showToast() {
-        Toast toast = Toast.makeText(this, "Bilangan Fibonacci", Toast.LENGTH_SHORT);
-        toast.show();
-    }
-    public void countTop() {
-        if (count < 0) {
-            count = 0;
+    public void countUp(View view) {
+        if (count == 0) {
+            showCount.setText("0");
+        } else if (count == 1) {
+            showCount.setText("1");
+        } else {
+            if (limit != -1 && count > limit) {
+                // Jika count melebihi limit, atur ulang perhitungan
+                count = 0;
+                fibNMinus1 = 1;
+                fibNMinus2 = 0;
+                showCount.setText(getString(R.string.count_initial_value));
+            } else {
+                long fibCurrent = fibNMinus1 + fibNMinus2;
+                fibNMinus2 = fibNMinus1;
+                fibNMinus1 = fibCurrent;
+
+                // Mengatur warna teks berdasarkan angka Fibonacci
+                int colorResId = R.color.color1; // Warna default
+                switch (count % 3) {
+                    case 1:
+                        colorResId = R.color.color1; // Warna merah
+                        break;
+                    case 2:
+                        colorResId = R.color.color2; // Warna hijau
+                        break;
+                    case 0:
+                        colorResId = R.color.color3; // Warna biru
+                        break;
+                }
+                showCount.setTextColor(getResources().getColor(colorResId));
+                showCount.setText(String.valueOf(fibCurrent));
+            }
         }
-        int result = generateFibonacci(count);
-        showcount.setText(Integer.toString(result));
+
         count++;
     }
 
-    private int generateFibonacci(int n) {
-        if (n <= 0) {
-            return 0;
-        }
-        else if (n == 1) {
-            return 1;
-        }
+    public void back1(View view) {
+        count = 1;
+        fibNMinus1 = 1;
+        fibNMinus2 = 0;
+        limit = -1;
+        showCount.setText(getString(R.string.count_initial_value));
+    }
 
-        int first = 1;
-        int second = 1;
+    public void setLimit(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Set limit bilangan yang ditampilkan :");
 
-        for (int i = 2; i <= n; i++) {
-            int next = first + second;
-            first = second;
-            second = next;
-        }
+        final EditText input = new EditText(this);
+        input.setInputType(android.text.InputType.TYPE_CLASS_NUMBER);
+        builder.setView(input);
 
-        return second;
+        builder.setPositiveButton("OK", (dialog, which) -> {
+            String limitStr = input.getText().toString();
+            limit = Integer.parseInt(limitStr);
+        });
+
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+
+        builder.show();
     }
 }
 ```
