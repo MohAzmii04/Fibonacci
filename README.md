@@ -217,10 +217,7 @@ public class MainActivity extends AppCompatActivity {
 ## Hasil run program bilangan Fibonacci :
 
 
-
-
-
-https://github.com/MohAzmii04/Fibonacci/assets/115864496/718ceb26-5d4c-435c-bb41-e8b1bc4b1dc9
+https://github.com/MohAzmii04/Fibonacci/assets/115864496/aee0f3fe-35fd-49e5-b1c0-df39df0c4a9a
 
 
 ## Finish, Terima Kasih
