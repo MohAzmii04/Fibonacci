@@ -8,6 +8,8 @@ Kelas : TI.22.A1
 
 Mata Kuliah : Pemrograman Mobile 1
 
+Dosen Pengampu : Donny Maulana, S.Kom., M.M.S.I
+
 Tugas : Buatlah Method Program java Toast Number, dengan menghasilkan Bilangan Fibonacci
 
 ## Code pada menu program java class `(MainActivity.java)` :
